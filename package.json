@@ -1,0 +1,261 @@
+{
+  "name": "vscode-fanfou",
+  "displayName": "VSCode Fanfou",
+  "description": "A Fanfou client for VS Code",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.35.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:fanfouTimeline"
+  ],
+  "icon": "icon.png",
+  "main": "./src/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "VSCode Fanfou Settings",
+      "properties": {
+        "vsCodeFanfou.consumerKey": {
+          "type": "string",
+          "default": "2e8a90b1e9426bf3cbfd27fb80c9346a",
+          "description": "consumer key"
+        },
+        "vsCodeFanfou.consumerSecret": {
+          "type": "string",
+          "default": "c9cdb57b68ab9c7e971a0f13941b1496",
+          "description": "consumer secret"
+        },
+        "vsCodeFanfou.username": {
+          "type": "string",
+          "default": "",
+          "description": "username"
+        },
+        "vsCodeFanfou.password": {
+          "type": "string",
+          "default": "",
+          "description": "password"
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "fanfouTimeline.setting",
+        "title": "设置",
+        "icon": {
+          "light": "resources/light/setting.svg",
+          "dark": "resources/dark/setting.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.refresh",
+        "title": "刷新",
+        "icon": {
+          "light": "resources/light/refresh.svg",
+          "dark": "resources/dark/refresh.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.next",
+        "title": "下一页",
+        "icon": {
+          "light": "resources/light/next.svg",
+          "dark": "resources/dark/next.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.prev",
+        "title": "上一页",
+        "icon": {
+          "light": "resources/light/prev.svg",
+          "dark": "resources/dark/prev.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.send",
+        "title": "发送",
+        "icon": {
+          "light": "resources/light/send.svg",
+          "dark": "resources/dark/send.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.mention",
+        "title": "@TA",
+        "icon": {
+          "light": "resources/light/mention.svg",
+          "dark": "resources/dark/mention.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.like",
+        "title": "收藏",
+        "icon": {
+          "light": "resources/light/favourite.svg",
+          "dark": "resources/dark/favourite.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.unlike",
+        "title": "取消收藏",
+        "icon": {
+          "light": "resources/light/faved.svg",
+          "dark": "resources/dark/faved.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.repost",
+        "title": "转发",
+        "icon": {
+          "light": "resources/light/retweet.svg",
+          "dark": "resources/dark/retweet.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.unretweet",
+        "title": "Un-Retweet",
+        "icon": {
+          "light": "resources/light/unretweet.svg",
+          "dark": "resources/dark/unretweet.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.reply",
+        "title": "回复消息",
+        "icon": {
+          "light": "resources/light/comment.svg",
+          "dark": "resources/dark/comment.svg"
+        }
+      },
+      {
+        "command": "fanfouTimeline.seephoto",
+        "title": "查看图片",
+        "icon": {
+          "light": "resources/light/eye.svg",
+          "dark": "resources/dark/eye.svg"
+        }
+      },
+      {
+        "command": "vscode-tweet.showMsg",
+        "title": "vscode-tweet"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vscodeFanfou",
+          "title": "VSCode Fanfou",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "vscodeFanfou": [
+        {
+          "id": "fanfouTimeline",
+          "name": "首页"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "fanfouTimeline.setting",
+          "group": "navigation",
+          "when": "view == fanfouTimeline"
+        },
+        {
+          "command": "fanfouTimeline.refresh",
+          "group": "navigation",
+          "when": "view == fanfouTimeline"
+        },
+        {
+          "command": "fanfouTimeline.prev",
+          "group": "navigation",
+          "when": "view == fanfouTimeline"
+        },
+        {
+          "command": "fanfouTimeline.next",
+          "group": "navigation",
+          "when": "view == fanfouTimeline"
+        },
+        {
+          "command": "fanfouTimeline.send",
+          "group": "navigation",
+          "when": "view == fanfouTimeline"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "fanfouTimeline.repost",
+          "when": "view == fanfouTimeline &&  viewItem == fanfou-status-head-fav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.repost",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-nofav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.reply",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-fav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.reply",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-nofav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.like",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-nofav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.unlike",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-fav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.mention",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-fav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.mention",
+          "when": "view == fanfouTimeline && viewItem == fanfou-status-head-nofav",
+          "group": "inline"
+        },
+        {
+          "command": "fanfouTimeline.seephoto",
+          "when": "view == fanfouTimeline && viewItem == see-photo",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "node ./node_modules/vscode/bin/test"
+  },
+  "devDependencies": {
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "eslint": "^5.13.0",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28"
+  },
+  "dependencies": {
+    "fanfou-sdk": "^4.0.5",
+    "image-downloader": "^3.4.2",
+    "node-time-ago": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yrming/vscode-fanfou"
+  },
+  "publisher": "YRM"
+}
