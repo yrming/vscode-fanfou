@@ -90,7 +90,7 @@ class TimelineProvider {
                 photo: item.photo || {}
               };
             });
-            this.model = data.concat(this.model);
+            this.model = data;
             this.since_id = this.model[0].id;
             this.max_id = this.model[this.model.length - 1].id;
             this.refresh();
